@@ -46,9 +46,16 @@ public class KnightBoard {
     return helper(startingRow,startingCol,1);
   }
 
-  public boolean helper(int row, int col,int move) {
+  private boolean canMove(int row,int col,int[] move) {
+    return !(row+move[0]<0 || row+move[0]>=board.length || col+move[1]<0 || col+move[0]>=board[0].length);
+  }
+
+  private boolean helper(int row, int col,int move) {
     int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
     //System.out.println(moves[2][1]);
+    if (move >= board.length * board[0].length) {
+      return true;
+    }
     return true;
   }
 }
