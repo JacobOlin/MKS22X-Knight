@@ -47,6 +47,8 @@ public class KnightBoard {
   }
 
   public boolean helper(int row, int col,int move) {
+    int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
+    //System.out.println(moves[2][1]);
     return true;
   }
 }
