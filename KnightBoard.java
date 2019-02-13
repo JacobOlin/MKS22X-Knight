@@ -29,13 +29,16 @@ public class KnightBoard {
     return ans;
   }
 
-  public boolean solve(int startRow,int StartCol) {
+  public boolean solve(int startingRow,int startingCol) {
     for (int i = 0;i < board.length;i += 1) {
       for (int j = 0;j < board[i].length;j += 1) {
         if (board[i][j] != 0) {
           throw new IllegalStateException();
         }
       }
+    }
+    if (startingRow < 0 || startingRow >= board.length || startingCol < 0 || startingCol >= board[0].length) {
+      throw new IllegalArgumentException();
     }
     return true;
   }
