@@ -56,6 +56,16 @@ public class KnightBoard {
     if (move >= board.length * board[0].length) {
       return true;
     }
-    return true;
+
+    for (int i = 0;i < moves.length;i += 1) {
+      if (canMove(row,col,moves[i])) {
+        board[row + moves[i][0]][col + moves[i][1]] = move + 1;
+        if (helper(row + moves[i][0],col + moves[i][1],move + 1)) {
+          return true;
+        }
+        board[row + moves[i][0]][col + moves[i][1]] = 0;
+      }
+    }
+    return false;
   }
 }
