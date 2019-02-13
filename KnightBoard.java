@@ -40,6 +40,10 @@ public class KnightBoard {
     if (startingRow < 0 || startingRow >= board.length || startingCol < 0 || startingCol >= board[0].length) {
       throw new IllegalArgumentException();
     }
+    return helper(startingRow,startingCol,0);
+  }
+
+  public boolean helper(int row, int col,int move) {
     return true;
   }
 }
