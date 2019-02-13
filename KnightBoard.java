@@ -11,7 +11,17 @@ public class KnightBoard {
   }
 
   public String toString() {
-    return "";
+    String ans = "";
+    for (int i = 0;i < board.length;i += 1) {
+      for (int j = 0;j < board[i].length;j += 1) {
+        if (board[i][j] < 10) {
+          ans += " ";
+        }
+        ans += board[i][j] + " ";
+      }
+      ans += "\n";
+    }
+    return ans;
   }
 
   public boolean solve(int startRow,int StartCol) {
