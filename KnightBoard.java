@@ -43,11 +43,12 @@ public class KnightBoard {
     if (startingRow < 0 || startingRow >= board.length || startingCol < 0 || startingCol >= board[0].length) {
       throw new IllegalArgumentException();
     }
+    board[startingRow][startingCol] = 1;
     return helper(startingRow,startingCol,1);
   }
 
   private boolean canMove(int row,int col,int[] moves) {
-    return !(row+moves[0]<0 || row+moves[0]>=board.length || col+moves[1]<0 || col+moves[1]>=board[0].length);
+    return !(row+moves[0]<0 || row+moves[0]>=board.length || col+moves[1]<0 || col+moves[1]>=board[0].length) && board[row + moves[0]][col + moves[1]] == 0;
   }
 
   private boolean helper(int row, int col,int move) {
@@ -59,6 +60,7 @@ public class KnightBoard {
 
     for (int i = 0;i < moves.length;i += 1) {
       if (canMove(row,col,moves[i])) {
+        //System.out.println(toString());
         //System.out.println("R: " + row + " C: " + col + " i: " + i + " move: " + move);
         board[row + moves[i][0]][col + moves[i][1]] = move + 1;
         if (helper(row + moves[i][0],col + moves[i][1],move + 1)) {
