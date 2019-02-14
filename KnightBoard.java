@@ -86,7 +86,7 @@ public class KnightBoard {
     return countHelper(startingRow,startingCol,1,0);
   }
 
-  public int countHelper(int row, int col, int move,int count) {
+  private int countHelper(int row, int col, int move,int count) {
     int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
     //System.out.println(moves[2][1]);
     if (move >= board.length * board[0].length) {
