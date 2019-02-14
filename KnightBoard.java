@@ -83,6 +83,9 @@ public class KnightBoard {
     if (startingRow < 0 || startingCol < 0 || startingRow >= board.length || startingCol >= board[0].length) {
       throw new IllegalArgumentException();
     }
+    if (board.length == 1 || board[0].length == 1) {
+      return 0;
+    }
     return countHelper(startingRow,startingCol,1,0);
   }
 
@@ -99,7 +102,7 @@ public class KnightBoard {
         //System.out.println("R: " + row + " C: " + col + " i: " + i + " move: " + move);
         board[row + moves[i][0]][col + moves[i][1]] = move + 1;
         if (countHelper(row + moves[i][0],col + moves[i][1],move + 1,count) > 0) {
-          count += 1;
+          count = countHelper(row + moves[i][0],col+moves[i][1],move+1,count);
         }
         board[row + moves[i][0]][col + moves[i][1]] = 0;
       }
