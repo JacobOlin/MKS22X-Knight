@@ -71,4 +71,8 @@ public class KnightBoard {
     }
     return false;
   }
+
+  public int countSolutions(int startingRow, int startingCol) {
+    return 0;
+  }
 }
