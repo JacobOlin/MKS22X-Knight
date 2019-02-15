@@ -1,5 +1,6 @@
 public class KnightBoard {
   private int[][] board;
+  private int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
 
   public KnightBoard(int startingRows,int startingCols) {
     if (startingRows <= 0 || startingCols <= 0) {
@@ -52,7 +53,6 @@ public class KnightBoard {
   }
 
   private boolean helper(int row, int col,int move) {
-    int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
     //System.out.println(moves[2][1]);
     if (move >= board.length * board[0].length) {
       return true;
@@ -90,7 +90,6 @@ public class KnightBoard {
   }
 
   private int countHelper(int row, int col, int move,int count) {
-    int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
     //System.out.println(moves[2][1]);
     if (move >= board.length * board[0].length) {
       count += 1;
