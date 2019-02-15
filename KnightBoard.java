@@ -45,7 +45,11 @@ public class KnightBoard {
       throw new IllegalArgumentException();
     }
     board[startingRow][startingCol] = 1;
-    return helper(startingRow,startingCol,1);
+    boolean ans = helper(startingRow,startingCol,1);
+    if (!ans) {
+      board[startingRow][startingCol] = 0;
+    }
+    return ans;
   }
 
   private boolean canMove(int row,int col,int[] moves) {
