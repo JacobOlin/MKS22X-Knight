@@ -15,12 +15,12 @@ public class KnightBoard {
     }
 
     makeBoard();
-    /*for (int i = 0;i < moveBoard.length;i += 1) {
+    for (int i = 0;i < moveBoard.length;i += 1) {
       for (int j = 0;j < moveBoard[i].length;j += 1) {
         System.out.print(moveBoard[i][j] + " ");
       }
       System.out.println();
-    }*/
+    }
   }
 
   public String toString() {
@@ -139,7 +139,7 @@ public class KnightBoard {
                 moveBoard[i][j] = 4;
               }
               else{
-                if ((i==1 || i+2==moveBoard.length)&&(j==1 || j+2==board.length)) {
+                if ((i==1 || i+2==moveBoard.length)&&(j==1 || j+2==moveBoard[i].length)) {
                   moveBoard[i][j] = 4;
                 }
                 else {
