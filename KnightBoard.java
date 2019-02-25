@@ -114,7 +114,34 @@ public class KnightBoard {
     return count;
   }
 
-  public void makeBoard() {
-    
+  private void makeBoard() {
+    moveBoard = new int[board.length][board[0].length];
+    if (moveBoard.length >= 4 && moveBoard[0].length >= 4) {
+      for (int i = 0;i < moveBoard.length;i += 1) {
+        for (int j = 0;j < moveBoard[i].length;j += 1) {
+          if ((i == 0 || i+1 == moveBoard.length) && (j == 0 || j+1 == moveBoard[i].length)) {
+            moveBoard[i][j] = 2;
+          }
+          else {
+            if (((i==1 || i+2==moveBoard.length) && (j==0 || j+1==moveBoard[i].length)) || ((j==1 || j+1==moveBoard[i].length) && (i==0 || i+1==moveBoard.length))) {
+              moveBoard[i][j] = 3;
+            }
+            else {
+              if ((i==1 || i+1==board.length)&&(j==1 || j+1==board.length)) {
+                moveBoard[i][j] = 4;
+              }
+              else {
+                if (i == 1 || j == 1 || i+1 == board.length || j+1 == board[i].length) {
+                  moveBoard[i][j] = 6;
+                }
+                else {
+                  moveBoard[i][j] = 8;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
