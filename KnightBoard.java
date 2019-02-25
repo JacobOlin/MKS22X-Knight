@@ -1,6 +1,7 @@
 public class KnightBoard {
   private int[][] board;
   private int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
+  private int[][] moveBoard;
 
   public KnightBoard(int startingRows,int startingCols) {
     if (startingRows <= 0 || startingCols <= 0) {
@@ -111,5 +112,9 @@ public class KnightBoard {
       }
     }
     return count;
+  }
+
+  public void makeBoard() {
+    
   }
 }
