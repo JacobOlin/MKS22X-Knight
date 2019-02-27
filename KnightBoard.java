@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class KnightBoard {
   private int[][] board;
   private int[][] moves = {{1,2},{2,1},{1,-2},{-2,1},{-1,2},{2,-1},{-1,-2},{-2,-1}};
@@ -15,12 +17,12 @@ public class KnightBoard {
     }
 
     makeBoard();
-    for (int i = 0;i < moveBoard.length;i += 1) {
+    /*for (int i = 0;i < moveBoard.length;i += 1) {
       for (int j = 0;j < moveBoard[i].length;j += 1) {
         System.out.print(moveBoard[i][j] + " ");
       }
       System.out.println();
-    }
+    }*/
   }
 
   public String toString() {
@@ -54,7 +56,13 @@ public class KnightBoard {
       throw new IllegalArgumentException();
     }
     board[startingRow][startingCol] = 1;
-    boolean ans = helper(startingRow,startingCol,1);
+    boolean ans;
+    if (board.length >=4 && board[0].length >= 4) {
+      ans = optimized(startingRow,startingCol,1);
+    }
+    else {
+      ans = helper(startingRow,startingCol,1);
+    }
     if (!ans) {
       board[startingRow][startingCol] = 0;
     }
@@ -80,6 +88,53 @@ public class KnightBoard {
           return true;
         }
         board[row + moves[i][0]][col + moves[i][1]] = 0;
+      }
+    }
+    return false;
+  }
+
+  private boolean optimized(int row, int col,int move) {
+    ArrayList<node> a = new ArrayList<node>();
+    for (int i = 0;i < moves.length;i += 1) {
+      //System.out.println("Row: " + row + " r: " + moves[i][0] + " Col: " + col + " c: " + moves[i][1] + " " + canMove(row+moves[i][0],col+moves[i][1],moves[i]));
+      if (canMove(row,col,moves[i])) {
+        node n = new node(moves[i][0],moves[i][1],moveBoard[row+moves[i][0]][col+moves[i][1]]);
+        a.add(n);
+      }
+    }
+    //System.out.println(a);
+    for (int i = 1;i < a.size();i += 1) {
+      for (int j = 0;j < i;j += 1) {
+        if (a.get(j).compareTo(a.get(i))) {
+          a.add(i,a.remove(j));
+        }
+      }
+    }
+    //System.out.println(moves[2][1]);
+    if (move >= board.length * board[0].length) {
+      return true;
+    }
+
+    for (int i = 0;i < a.size();i += 1) {
+      int[] q = {a.get(i).getUd(),a.get(i).getLr()};
+      if (canMove(row,col,q)) {
+        //System.out.println(toString());
+        //System.out.println("R: " + row + " C: " + col + " i: " + i + " move: " + move);
+        board[row + a.get(i).getUd()][col + a.get(i).getLr()] = move + 1;
+        for (int k = 0;k < moves.length;k += 1) {
+          if (canMove(row+a.get(i).getUd()+moves[k][0],col+a.get(i).getLr()+moves[k][1],moves[k])) {
+            moveBoard[row+a.get(i).getUd()+moves[k][0]][col+a.get(i).getLr()+moves[k][1]] -= 1;
+          }
+        }
+        if (optimized(row + a.get(i).getUd(),col + a.get(i).getLr(),move + 1)) {
+          return true;
+        }
+        for (int k = 0;k < moves.length;k += 1) {
+          if (canMove(row+a.get(i).getUd()+moves[k][0],col+a.get(i).getLr()+moves[k][1],moves[k])){
+            moveBoard[row+a.get(i).getUd()+moves[k][0]][col+a.get(i).getLr()+moves[k][1]] += 1;
+          }
+        }
+        board[row + a.get(i).getUd()][col + a.get(i).getLr()] = 0;
       }
     }
     return false;
@@ -175,5 +230,38 @@ public class KnightBoard {
       }
     }
   }
+
+  private class node{
+    private int ud;
+    private int lr;
+    private int moves;
+
+    public node(int up,int left, int move) {
+      ud = up;
+      lr = left;
+      moves = move;
+    }
+
+    public int getLr() {
+      return lr;
+    }
+
+    public int getUd() {
+      return ud;
+    }
+
+    public int val() {
+      return moves;
+    }
+
+    public boolean compareTo(node a) {
+      return val() > a.val();
+    }
+
+    public String toString() {
+      return moves + "";
+    }
+  }
+
 
 }
