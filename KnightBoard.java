@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class KnightBoard {
   private int[][] board;
@@ -103,13 +103,7 @@ public class KnightBoard {
       }
     }
     //System.out.println(a);
-    for (int i = 1;i < a.size();i += 1) {
-      for (int j = 0;j < i;j += 1) {
-        if (a.get(j).compareTo(a.get(i))) {
-          a.add(i,a.remove(j));
-        }
-      }
-    }
+    Collections.sort(a);
     //System.out.println(moves[2][1]);
     if (move >= board.length * board[0].length) {
       return true;
@@ -231,7 +225,7 @@ public class KnightBoard {
     }
   }
 
-  private class node{
+  private class node implements Comparable<node>{
     private int ud;
     private int lr;
     private int moves;
@@ -254,8 +248,8 @@ public class KnightBoard {
       return moves;
     }
 
-    public boolean compareTo(node a) {
-      return val() > a.val();
+    public int compareTo(node a) {
+      return val() - a.val();
     }
 
     public String toString() {
